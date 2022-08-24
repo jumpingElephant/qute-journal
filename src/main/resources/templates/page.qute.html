@@ -1,31 +1,55 @@
+{@java.util.List<? extends com.example.Task> tasks}
 <!DOCTYPE html>
-<html>
+<html lang="de-de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello {name ?: "Qute"}</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-        }
-
-        h1 {
-            color: #4695EB;
-            font-size: 6vw;
-        }
-
-        h1 b {
-            color: #be9100;
-        }
-
-        p {
-            font-size: 2vw;
-        }
-    </style>
+    <link rel="stylesheet" href="qute-todo-app.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-<h1>Hello <b>{name ?: "Qute"}</b></h1>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Tasks</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Tasks</h1>
 
-<p>Create your web page using Quarkus RESTEasy & Qute</p>
+    <p>Create your tasks using Quarkus RESTEasy & Qute</p>
+
+    <div  class="task-grid">
+        {#for task in tasks}
+        <div class="task-card">
+            <h2>{task.title}</h2>
+                <div><button class="edit">edit</button>
+                <button class="delete">delete</button></div>
+        </div>
+        {/for}
+    </div>
+</main>
+<footer>
+    <p>© 2022</p>
+</footer>
 </body>
 </html>

@@ -8,10 +8,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-@Path("/some-page")
+@Path("/")
 public class SomePage {
 
     private final Template page;
@@ -23,7 +25,17 @@ public class SomePage {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance get(@QueryParam("name") String name) {
-        return page.data("name", name);
+        final var tasks = List.of(Task.builder()
+                        .title("Eat")
+                        .dueDate(LocalDate.now())
+                        .build(),
+                Task.builder()
+                        .title("Sleep")
+                        .dueDate(LocalDate.now())
+                        .build());
+        return page
+                .data("name", name)
+                .data("tasks", tasks);
     }
 
 }
