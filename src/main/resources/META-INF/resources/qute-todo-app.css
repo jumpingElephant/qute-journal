@@ -104,8 +104,7 @@ button {
 }
 
 button:hover {
-    /*background-color: #00a960;*/
-    opacity: 60%;
+    opacity: 75%;
 }
 
 .task-grid {
@@ -134,6 +133,7 @@ button:hover {
 .task-card:active {
     color: #0070f3;
     border-color: #0070f3;
+    box-shadow: 0 0 10px 0 #50b0ff;
 }
 
 .task-card h2 {
