@@ -8,7 +8,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
-import java.util.Comparator;
 
 import static java.util.Objects.requireNonNull;
 
@@ -29,10 +28,7 @@ public class SomePage {
     public TemplateInstance get(@QueryParam("name") String name) {
         return page
                 .data("name", name)
-                .data("tasks", taskRepository.getTasks().stream()
-                        .sorted(Comparator.comparing(Task::dueDate).thenComparing(Task::title))
-                        .toList()
-                );
+                .data("tasks", taskRepository.getTasks());
     }
 
     @DELETE

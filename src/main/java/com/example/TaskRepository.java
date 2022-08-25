@@ -1,6 +1,7 @@
 package com.example;
 
-import lombok.Getter;
+import io.smallrye.mutiny.Uni;
+import lombok.extern.java.Log;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -8,9 +9,9 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Log
 @ApplicationScoped
 public class TaskRepository {
-    @Getter
     private Collection<Task> tasks;
 
     @PostConstruct
@@ -33,5 +34,18 @@ public class TaskRepository {
                 .collect(Collectors.toSet());
         tasks.removeAll(taskSet);
         return taskSet.stream().findFirst();
+    }
+
+    public Uni<List<Task>> getTasks() {
+        return Uni.createFrom()
+                .item(getTaskCollection().stream()
+                        .sorted(Comparator
+                                .comparing(Task::dueDate)
+                                .thenComparing(Task::title))
+                        .toList());
+    }
+
+    private Collection<Task> getTaskCollection() {
+        return tasks;
     }
 }
