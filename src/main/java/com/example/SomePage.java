@@ -1,5 +1,6 @@
 package com.example;
 
+import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 
@@ -9,19 +10,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 
-import static java.util.Objects.requireNonNull;
-
 @Path("/")
 public class SomePage {
 
-    private final Template page;
+    @Inject
+    @Location("page.qute.html")
+    Template page;
 
     @Inject
     TaskRepository taskRepository;
-
-    public SomePage(Template page) {
-        this.page = requireNonNull(page, "page is required");
-    }
 
     @GET
     @Produces(MediaType.TEXT_HTML)
