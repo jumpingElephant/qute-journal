@@ -6,7 +6,11 @@
     <script>
         function deleteSth(taskId) {
             fetch('/tasks/' + taskId, {
-                method:'DELETE'
+                method:'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: null
             }).then(response => {
                 if (response.status >= 200 && response.status < 400) {
                     window.location.reload();
@@ -34,7 +38,7 @@
                 </div>
                 <div>
                     <button class="edit">edit</button>
-                    <button class="delete" onclick="deleteSth('{task.id}')">delete</button>
+                    <button class="delete" onclick="deleteTask('{task.id}')">delete</button>
                 </div>
             </div>
             </section>
