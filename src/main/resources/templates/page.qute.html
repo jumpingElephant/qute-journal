@@ -1,6 +1,7 @@
 {#include page.base.html}
 
 {#title}Hello {name ?: "Qute"}{/title}
+{#messageTitle}{#if onTaskDeleted}Deleted Task{/}{/messageTitle}
 
 {#script}
     <script>
@@ -13,6 +14,7 @@
                 body: null
             }).then(response => {
                 if (response.status >= 200 && response.status < 400) {
+                    document.cookie= 'Application-Action=taskDeleted';
                     window.location.reload();
                 } else {
                     alert(response.statusText);

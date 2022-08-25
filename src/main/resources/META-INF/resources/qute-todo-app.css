@@ -6,29 +6,23 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
 a {
     color: inherit;
     text-decoration: none;
 }
-
 * {
     box-sizing: border-box;
 }
-
 h1 {
     color: #4695EB;
     font-size: 4vw;
 }
-
 h1 b {
     color: #be9100;
 }
-
 p {
     font-size: 1vw;
 }
-
 header {
     border-style: solid;
     border-width: 1px;
@@ -41,40 +35,33 @@ header {
     align-items: center;
     box-shadow: 0 0 25px 0 black;
 }
-
 header * {
     display: inline;
 }
-
 header li {
     margin: 2px;
 }
-
 header li a {
     color: white;
     text-decoration: none;
     padding: 5px 30px;
 }
-
 header li a:hover {
     text-decoration: inherit;
     background-color: #0070f3;
 }
-
 form {
     display: table;
     min-width: 350px;
     margin: 0 auto;
     padding: 1rem;
 }
-
 label {
     display: table;
     width: 100%;
     margin-bottom: 0.5rem;
     color: #3b3b3b;
 }
-
 input {
     display: table;
     width: 100%;
@@ -84,12 +71,10 @@ input {
     box-sizing: border-box;
     margin-bottom: 2.5rem;
 }
-
 input:focus {
     outline: none;
     border-color: #0070f3;
 }
-
 button {
     display: table;
     width: 30%;
@@ -102,11 +87,11 @@ button {
     color: #fff;
     cursor: pointer;
 }
-
 button:hover {
     opacity: 75%;
 }
 
+/* task list */
 .task-grid {
     display: flex;
     align-items: center;
@@ -114,8 +99,6 @@ button:hover {
     flex-wrap: wrap;
     max-width: 800px;
 }
-
-
 .task-card {
     margin: 0.25rem;
     padding: 1.5rem;
@@ -127,7 +110,6 @@ button:hover {
     transition: color 0.15s ease, border-color 0.15s ease;
     min-width: 420px;
 }
-
 .task-card:hover,
 .task-card:focus,
 .task-card:active {
@@ -135,29 +117,24 @@ button:hover {
     border-color: #0070f3;
     box-shadow: 0 0 10px 0 #50b0ff;
 }
-
 .task-card h2 {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
 }
-
 .task-card p {
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.5;
 }
-
 .task-card button {
     margin-bottom: 0;
     margin-top: 0.3rem;
     display: inline-block;
 }
-
 .task-card-row {
     display: flex;
     align-items: stretch;
 }
-
 .task-card-row .title {
     flex-grow: 8;
 }
@@ -171,5 +148,95 @@ button:hover {
 }
 
 .delete {
+    background-color: red;
+}
+
+/* badge example of W3-school */
+.w3-badge, .w3-tag {
+    background-color: red;
+    color: #fff;
+    display: inline-block;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center
+}
+
+.w3-badge {
+    border-radius: 50%
+}
+
+/* message box */
+.custom-model-main {
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+    top: 1em;
+    left: 40%;
+    right: 40%;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    opacity: 0;
+    z-index: -1;
+    user-select: none;
+}
+
+.model-open {
+    z-index: 99999;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.custom-model-inner {
+    display: inline-block;
+    vertical-align: middle;
+    width: 320px;
+    margin: 30px auto;
+    max-width: 97%;
+}
+
+.custom-model-wrap {
+    display: block;
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    outline: 0;
+    text-align: left;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    color: #4695EB;
+}
+
+.model-open .custom-model-inner {
+    position: relative;
+    z-index: 999;
+}
+
+.close-btn {
+    display: inline-block;
+    position: absolute;
+    right: -0.35em;
+    top: -0.35em;
+    z-index: 99;
+    font-size: 30px;
+    color: black;
+    background-color: transparent;
+    width: 1.8em;
+    height: 1.8em;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    box-shadow: 0 0 25px 0 white;
     background-color: red;
 }

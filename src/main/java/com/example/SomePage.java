@@ -3,14 +3,18 @@ package com.example;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
+import lombok.extern.java.Log;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.Objects;
 
+@Log
 @Path("/")
+@Produces(MediaType.APPLICATION_JSON)
 public class SomePage {
 
     @Inject
@@ -22,10 +26,18 @@ public class SomePage {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance get(@QueryParam("name") String name) {
+    public TemplateInstance get(@QueryParam("name") String name, @CookieParam("Application-Action") String applicationAction) {
+        log.info("SomePage.get: applicationAction = " + applicationAction);
         return page
                 .data("name", name)
-                .data("tasks", taskRepository.getTasks());
+                .data("tasks", taskRepository.getTasks())
+                .data("applicationAction", applicationAction)
+                .data("displayMessage", Objects.nonNull(applicationAction) &&
+                        switch (applicationAction) {
+                            case "taskDeleted" -> true;
+                            default -> false;
+                        })
+                .data("onTaskDeleted", Objects.equals(applicationAction, "taskDeleted"));
     }
 
     @DELETE

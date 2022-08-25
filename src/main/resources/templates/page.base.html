@@ -23,6 +23,12 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     {#insert script}{/}
+    {#if displayMessage}
+        <script>
+            document.cookie = 'Application-Action={applicationAction};max-age=0';
+            window.setTimeout(() => window.document.getElementById('overlay-message').classList.remove('model-open'), 2000);
+        </script>
+        {/}
 </head>
 <body>
 <header>
@@ -36,6 +42,23 @@
 <main>
     {#insert main}Nothing to see?{/}
 </main>
+{#if displayMessage}
+    <aside>
+    <div id="overlay-message" class="custom-model-main model-open">
+    <div class="custom-model-inner">
+    <button class="close-btn" type="button"
+            onclick="window.document.getElementById('overlay-message').classList.remove('model-open');">×
+    </button>
+    <div class="custom-model-wrap">
+    <div class="pop-up-content-wrap">
+    <h2>{#insert messageTitle}Have a nice day!{/}</h2>
+    {#insert messageContent}{/}
+    </div>
+    </div>
+    </div>
+    </div>
+    </aside>
+{/if}
 <footer>
     <p>© 2022</p>
 </footer>
