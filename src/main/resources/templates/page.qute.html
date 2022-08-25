@@ -4,7 +4,7 @@
 
 {#script}
     <script>
-        function deleteSth(taskId) {
+        function deleteTask(taskId) {
             fetch('/tasks/' + taskId, {
                 method:'DELETE',
                 headers: {
