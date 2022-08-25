@@ -30,7 +30,7 @@ public class SomePage {
         return page
                 .data("name", name)
                 .data("tasks", taskRepository.getTasks().stream()
-                        .sorted(Comparator.comparing(Task::title))
+                        .sorted(Comparator.comparing(Task::dueDate).thenComparing(Task::title))
                         .toList()
                 );
     }

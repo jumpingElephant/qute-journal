@@ -148,9 +148,22 @@ button:hover {
 }
 
 .task-card button {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 0.3rem;
     display: inline-block;
+}
+
+.task-card-row {
+    display: flex;
+    align-items: stretch;
+}
+
+.task-card-row .title {
+    flex-grow: 8;
+}
+
+.task-card-row .detail {
+    flex-grow: 0;
 }
 
 .edit {

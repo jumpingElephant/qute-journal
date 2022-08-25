@@ -49,17 +49,24 @@
 
     <p>Create your tasks using Quarkus RESTEasy & Qute</p>
 
-    <div class="task-grid">
-        {#for task in tasks}
-        <div class="task-card">
-            <h2>{task.title}</h2>
-            <div>
-                <button class="edit">edit</button>
-                <button class="delete" onclick="deleteSth('{task.id}')">delete</button>
+    <article>
+        <div class="task-grid">
+            {#for task in tasks}
+            <section>
+            <div class="task-card" aria-label="list of tasks">
+                <div class="task-card-row">
+                    <h2 class="title" aria-label="title">{task.title}</h2>
+                    <h2 class="detail" aria-label="due date">{task.dueDate.format('dd.MM.yyyy')}</h2>
+                </div>
+                <div>
+                    <button class="edit">edit</button>
+                    <button class="delete" onclick="deleteSth('{task.id}')">delete</button>
+                </div>
             </div>
+            </section>
+            {/for}
         </div>
-        {/for}
-    </div>
+    </article>
 </main>
 <footer>
     <p>© 2022</p>
