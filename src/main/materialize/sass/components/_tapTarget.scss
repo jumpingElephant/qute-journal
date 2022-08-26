@@ -21,7 +21,6 @@
   .tap-target-wave::before {
     transform: scale(1);
   }
-
   .tap-target-wave::after {
     visibility: visible;
     animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
@@ -61,12 +60,10 @@
     border-radius: 50%;
     background-color: #ffffff;
   }
-
   &::before {
     transform: scale(0);
     transition: transform .3s;
   }
-
   &::after {
     visibility: hidden;
     transition: opacity .3s,

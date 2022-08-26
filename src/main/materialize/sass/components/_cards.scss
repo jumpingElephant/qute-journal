@@ -1,4 +1,5 @@
 
+
 .card-panel {
   transition: box-shadow .25s;
   padding: $card-padding;
@@ -20,7 +21,6 @@
   .card-title {
     font-size: 24px;
     font-weight: 300;
-
     &.activator {
       cursor: pointer;
     }
@@ -34,16 +34,13 @@
       max-height: 60%;
       overflow: hidden;
     }
-
     .card-image + .card-content {
       max-height: 40%;
     }
-
     .card-content {
       max-height: 100%;
       overflow: hidden;
     }
-
     .card-action {
       position: absolute;
       bottom: 0;
@@ -82,7 +79,6 @@
 
     .card-image {
       max-width: 50%;
-
       img {
         border-radius: 2px 0 0 2px;
         max-width: 100%;
@@ -147,7 +143,6 @@
     p {
       margin: 0;
     }
-
     .card-title {
       display: block;
       line-height: 32px;

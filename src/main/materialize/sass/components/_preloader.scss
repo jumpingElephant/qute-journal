@@ -407,7 +407,6 @@
     -webkit-transform: rotate(129deg);
     transform: rotate(129deg);
   }
-
   &.right .circle {
     left: -100%;
     border-left-color: transparent !important;
@@ -415,6 +414,7 @@
     transform: rotate(-129deg);
   }
 }
+
 
 
 .active .circle-clipper.left .circle {

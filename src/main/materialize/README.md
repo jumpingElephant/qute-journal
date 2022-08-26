@@ -33,7 +33,6 @@
 </p>
 
 ## Table of Contents
-
 - [Quickstart](#quickstart)
 - [Documentation](#documentation)
 - [Supported Browsers](#supported-browsers)
@@ -43,7 +42,6 @@
 - [Copyright and license](#copyright-and-license)
 
 ## Quickstart:
-
 Read the [getting started guide](http://materializecss.com/getting-started.html) for more information on how to use
 materialize.
 
@@ -66,7 +64,6 @@ The documentation can be found at <http://materializecss.com>. To run the docume
 need [Node.js](https://nodejs.org/en/) installed on your computer.
 
 ### Running documentation locally
-
 Run these commands to set up the documentation:
 
 ```bash
@@ -79,11 +76,9 @@ Then run `grunt monitor` to compile the documentation. When it finishes, open a 
 to `localhost:8000`. We use [BrowserSync](https://www.browsersync.io/) to display the documentation.
 
 ### Documentation for previous releases
-
 Previous releases and their documentation are available for [download](https://github.com/Dogfalo/materialize/releases).
 
 ## Supported Browsers:
-
 Materialize is compatible with:
 
 - Chrome 35+
@@ -110,5 +105,4 @@ You can also browse the [help-wanted](https://github.com/Dogfalo/materialize/lab
 tracker to find things to do.
 
 ## Copyright and license
-
 Code Copyright 2018 Materialize. Code released under the MIT license.

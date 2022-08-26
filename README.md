@@ -57,7 +57,6 @@ If you want to learn more about building native executables, please consult http
 
 The folder _src/main/materialize_ contains a copy of the _Sass_ download provided by Materialize.
 It can be built to a css-file using:
-
 ```shell script
 sass src/main/materialize/sass/materialize.scss src/main/resources/META-INF/resources/css/materialize.css
 ```

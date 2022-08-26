@@ -126,7 +126,6 @@ nav {
         background-color: rgba(0, 0, 0, .1);
       }
     }
-
     a {
       transition: background-color .3s;
       font-size: $navbar-font-size;
@@ -204,7 +203,6 @@ nav {
     position: fixed;
   }
 }
-
 @media #{$medium-and-up} {
   nav.nav-extended .nav-wrapper {
     min-height: $navbar-height;
