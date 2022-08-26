@@ -30,11 +30,9 @@
     {#if displayMessage}
     <script>
         document.cookie = 'Application-Action={applicationAction};max-age=0';
-        window.setTimeout(() => M.toast(\{html: '{#insert toastMessage}Have a nice day!{/}'\
-        }),
-        200
-        )
-        ;
+        // @formatter:off
+        window.setTimeout(() => M.toast(\{html: '{#insert toastMessage}Have a nice day!{/}'\}),200);
+        // @formatter:on
     </script>
     {/}
     <!--Let browser know website is optimized for mobile-->
