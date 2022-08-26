@@ -53,6 +53,15 @@ You can then execute your native executable with: `./target/qute-demo-1.0-SNAPSH
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
+## Building Materialize
+
+The folder _src/main/materialize_ contains a copy of the _Sass_ download provided by Materialize.
+It can be built to a css-file using:
+
+```shell script
+sass src/main/materialize/sass/materialize.scss src/main/resources/META-INF/resources/css/materialize.css
+```
+
 ## Related Guides
 
 - SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes
@@ -89,3 +98,4 @@ Create your web page using Quarkus RESTEasy Reactive & Qute
 Monitor your application's health using SmallRye Health
 
 [Related guide section...](https://quarkus.io/guides/smallrye-health)
+
