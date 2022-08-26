@@ -18,11 +18,17 @@ import java.util.Objects;
 public class SomePage {
 
     @Inject
-    @Location("page.qute.html")
+    @Location("task.list.html")
     Template page;
+    @Inject
+    @Location("task.edit.html")
+    Template editPage;
 
     @Inject
     TaskRepository taskRepository;
+
+    public static final String KEY_APPLICATION_ACTION = "applicationAction";
+    public static final String KEY_DISPLAY_MESSAGE = "displayMessage";
 
     @GET
     @Produces(MediaType.TEXT_HTML)
@@ -31,13 +37,36 @@ public class SomePage {
         return page
                 .data("name", name)
                 .data("tasks", taskRepository.getTasks())
-                .data("applicationAction", applicationAction)
-                .data("displayMessage", Objects.nonNull(applicationAction) &&
+                .data(KEY_APPLICATION_ACTION, applicationAction)
+                .data(KEY_DISPLAY_MESSAGE, Objects.nonNull(applicationAction) &&
                         switch (applicationAction) {
                             case "taskDeleted" -> true;
                             default -> false;
                         })
                 .data("onTaskDeleted", Objects.equals(applicationAction, "taskDeleted"));
+    }
+
+    @GET
+    @Path("tasks/{taskId}")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance editTaskPage(@PathParam("taskId") String taskId) {
+        log.info("SomePage.editTask: taskId = " + taskId);
+//        taskId = taskRepository.findTask(taskId)
+//                .map(Task::id)
+//                .orElseGet(() -> taskRepository.findAnyTask().id());
+        return editPage
+                .data("task", taskRepository.findTask(taskId).orElseThrow(NotFoundException::new))
+                .data(KEY_DISPLAY_MESSAGE, false);
+    }
+
+    @PUT
+    @Path("tasks/{taskId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateTask(@PathParam("taskId") String taskId, Task task) {
+        return taskRepository.updateTask(taskId, task)
+                .map(Response::ok)
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND))
+                .build();
     }
 
     @DELETE
@@ -49,7 +78,7 @@ public class SomePage {
     }
 
     @GET
-    @Path("reset")
+    @Path("dev/reset")
     public Response resetTasks() {
         taskRepository.init();
         return Response.seeOther(URI.create("/")).build();

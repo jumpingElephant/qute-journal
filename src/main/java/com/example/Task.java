@@ -4,6 +4,6 @@ import lombok.Builder;
 
 import java.time.LocalDate;
 
-@Builder
+@Builder(toBuilder = true)
 public record Task(String id, String title, LocalDate dueDate) {
 }
