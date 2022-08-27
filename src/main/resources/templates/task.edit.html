@@ -1,76 +1,82 @@
 {#include page.base.html}
 
-{#title}Edit Task{/title}
+    {#title}Edit Task{/title}
 
-{#script}
-    <script>
-        function updateTask(taskId) {
-            fetch('/tasks/' + taskId, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: document.getElementById('task_title').value,
-                    dueDate: document.getElementById('task_due_date').value
-                })
-            }).then(response => {
-                if (response.status >= 200 && response.status < 400) {
-                    document.cookie = 'Application-Action=taskDeleted';
-                    window.location.href = '/';
-                } else {
-                    alert(response.statusText);
-                }
-            });
-        }
-    </script>
-{/script}
+    {#script}
+        <script>
+            function updateTask(taskId) {
+                fetch('/tasks/' + taskId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: document.getElementById('task_title').value,
+                        dueDate: document.getElementById('task_due_date').value
+                    })
+                }).then(response => {
+                    if (response.status >= 200 && response.status < 400) {
+                        document.cookie = 'Application-Action=taskDeleted';
+                        window.location.href = '/';
+                    } else {
+                        alert(response.statusText);
+                    }
+                });
+            }
+        </script>
+    {/script}
 
     {@com.example.Task task}
-{#main}
-    <div  class="container">
-    <div class="row">
-    <div class="col s12 xl7 offset-m1">
-    <div class="section">
-    <div class="row">
-    <div class="col s12">
-    <h3 class="header">Edit Task</h3>
-    <p class="caption">Create your tasks using Quarkus RESTEasy & Qute</p>
+    {#main}
+        <div  class="container">
+        <div class="row">
+        <div class="col s12 xl7 offset-m1">
+        <div class="section">
+        <div class="row">
+        <div class="col s12">
+        <h3 class="header">Edit Task</h3>
 
-    <article>
-    <div class="col s12">
-    <section>
-    <div class="row" aria-label="list of tasks">
-    <div class="col offset-s1 s10">
-    <div class="card">
-    <div class="card-content">
-    <div class="row">
-        <div class="col s6">
-            <label for="task_title">Title</label>
-            <input placeholder="Title" id="task_title" type="text" value="{task.title}">
-        </div>
-        <div class="col s6">
-            <label for="task_due_date">Due Date</label>
-            <input placeholder="Due Date" id="task_due_date" type="date" value="{task.dueDate.format('yyyy-MM-dd')}">
-        </div>
-    </div>
-    <div class="card-action">
-    <a class="waves-effect waves-light btn" onclick="window.history.back()"><i class="material-icons left">cancel</i>Cancel</a>
-    <a class="waves-effect waves-light btn" onclick="updateTask('{task.id}')"><i class="material-icons left">save</i>Submit
-    </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
-    </div>
-    </article>
-    </div>
-    </div>
-                </div>
+        <article>
+        <div class="col s12">
+        <div class="row">
+            <div class="col s7">
+                <p class="caption">Edit your task using Quarkus RESTEasy & Qute</p>
             </div>
         </div>
-    </div>
-{/main}
+        <section>
+        <div class="row" aria-label="list of tasks">
+        <div class="col offset-s1 s10">
+        <div class="card">
+        <div class="card-content">
+        <div class="row">
+            <div class="col s6">
+                <label for="task_title">Title</label>
+                <input placeholder="Title" id="task_title" type="text" value="{task.title}">
+            </div>
+            <div class="col s6">
+                <label for="task_due_date">Due Date</label>
+                <input placeholder="Due Date" id="task_due_date" type="date"
+                       value="{task.dueDate.format('yyyy-MM-dd')}">
+            </div>
+        </div>
+        <div class="card-action">
+        <a class="waves-effect waves-light btn" onclick="window.history.back()"><i
+                    class="material-icons left">cancel</i>Cancel</a>
+        <a class="waves-effect waves-light btn" onclick="updateTask('{task.id}')"><i
+                    class="material-icons left">save</i>Submit</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        </div>
+        </article>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    {/main}
 {/include}
