@@ -6,6 +6,8 @@ import io.quarkus.qute.TemplateInstance;
 import lombok.extern.java.Log;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -62,7 +64,7 @@ public class SomePage {
     @PUT
     @Path("tasks/{taskId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateTask(@PathParam("taskId") String taskId, Task task) {
+    public Response updateTask(@PathParam("taskId") String taskId, @Valid @NotNull Task task) {
         return taskRepository.updateTask(taskId, task)
                 .map(Response::ok)
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND))

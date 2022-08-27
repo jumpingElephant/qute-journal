@@ -6,6 +6,7 @@ import lombok.extern.java.Log;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,6 +16,11 @@ import java.util.stream.Stream;
 @ApplicationScoped
 public class TaskRepository {
     private Map<String, Task> tasks;
+    /**
+     * Compares Comparables including null values. In results null values appear before manifested values.
+     */
+    public static final Comparator<ChronoLocalDate> NULL_SAFE_COMPARATOR = (o1, o2) -> Objects.equals(o1, o2) ? 0 :
+            (Objects.isNull(o1) ? -1 : (Objects.isNull(o2) ? +1 : o1.compareTo(o2)));
 
     @PostConstruct
     public void init() {
@@ -45,7 +51,7 @@ public class TaskRepository {
         return Uni.createFrom()
                 .item(getTaskCollection().stream()
                         .sorted(Comparator
-                                .comparing(Task::dueDate)
+                                .comparing(Task::dueDate, NULL_SAFE_COMPARATOR)
                                 .thenComparing(Task::title))
                         .toList());
     }
