@@ -1,14 +1,15 @@
 {#include page.base.html}
 
-    {#title}Edit Task{/title}
+    {#title}New Task{/title}
 
     {#script}
         <script>
-            function updateTask(taskId) {
-                fetch('/tasks/' + taskId, {
-                    method: 'PUT',
+            function createTask() {
+                fetch('/tasks', {
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
                         title: document.getElementById('task_title').value,
@@ -16,6 +17,7 @@
                     })
                 }).then(response => {
                     if (response.status >= 200 && response.status < 400) {
+                        document.cookie = 'Application-Action=taskCreated; SameSite=Strict; Secure';
                         window.location.href = '/';
                     } else {
                         alert(response.statusText);
@@ -25,7 +27,6 @@
         </script>
     {/script}
 
-    {@com.example.Task task}
     {#main}
     <div  class="container">
         <div class="row">
@@ -33,13 +34,13 @@
                 <div class="section">
                     <div class="row">
                         <div class="col s12">
-                            <h3 class="header">Edit Task</h3>
+                            <h3 class="header">New Task</h3>
 
                             <article>
                                 <div class="col s12">
                                     <div class="row">
                                         <div class="col s7">
-                                            <p class="caption">Edit your task using Quarkus RESTEasy & Qute</p>
+                                            <p class="caption">Cretae your task using Quarkus RESTEasy & Qute</p>
                                         </div>
                                     </div>
                                     <section>
@@ -50,18 +51,18 @@
                                                         <div class="row">
                                                             <div class="col s6">
                                                                 <label for="task_title">Title</label>
-                                                                <input placeholder="Title is required" id="task_title" type="text" value="{task.title}">
+                                                                <input placeholder="Title is required" id="task_title" type="text">
                                                             </div>
                                                             <div class="col s6">
                                                                 <label for="task_due_date">Due Date</label>
                                                                 <input placeholder="Due Date" id="task_due_date" type="date"
-                                                                       {#if task.dueDate}value="{task.dueDate.format('yyyy-MM-dd')}"{/}>
+                                                                       value="{today.format('yyyy-MM-dd')}">
                                                             </div>
                                                         </div>
                                                         <div class="card-action">
                                                             <a class="waves-effect waves-light btn" onclick="window.history.back()"><i
                                                                         class="material-icons left">cancel</i>Cancel</a>
-                                                            <a class="waves-effect waves-light btn" onclick="updateTask('{task.id}')"><i
+                                                            <a class="waves-effect waves-light btn" onclick="createTask()"><i
                                                                         class="material-icons left">save</i>Submit</a>
                                                         </div>
                                                     </div>

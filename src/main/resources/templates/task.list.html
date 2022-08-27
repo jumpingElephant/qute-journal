@@ -1,7 +1,7 @@
 {#include page.base.html}
 
     {#title}Hello {name ?: "Qute"}{/title}
-    {#toastMessage}{#if onTaskDeleted}Deleted Task{/}{/toastMessage}
+    {#toastMessage}{#if onTaskDeleted}Deleted Task{/}{#if onTaskCreated}Created Task{/}{/toastMessage}
 
     {#script}
         <script>
@@ -14,7 +14,7 @@
                     body: null
                 }).then(response => {
                     if (response.status >= 200 && response.status < 400) {
-                        document.cookie= 'Application-Action=taskDeleted';
+                        document.cookie= 'Application-Action=taskDeleted; SameSite=Strict; Secure';
                         window.location.reload();
                     } else {
                         alert(response.statusText);
@@ -41,7 +41,7 @@
                                                 <p class="caption">Create your tasks using Quarkus RESTEasy & Qute</p>
                                             </div>
                                             <div class="col s3 right-align">
-                                                <a class="waves-effect waves-light btn" href="/"><i class="material-icons left">add</i>Create</a>
+                                                <a class="waves-effect waves-light btn" href="tasks"><i class="material-icons left">add</i>Create</a>
                                             </div>
                                         </div>
                                         {#for task in tasks}

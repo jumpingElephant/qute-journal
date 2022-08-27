@@ -38,9 +38,18 @@ public class TaskRepository {
                 .collect(Collectors.toMap(Task::id, Function.identity())));
     }
 
-    public Task insertTask(Task task) {
-        tasks.put(task.id(), task);
-        return task;
+    public Task createTask(Task task) {
+        String taskId;
+        if (Objects.isNull(task.id())) {
+            taskId = UUID.randomUUID().toString();
+        } else {
+            taskId = task.id();
+        }
+        Task createdTask = task.toBuilder()
+                .id(taskId)
+                .build();
+        tasks.put(createdTask.id(), createdTask);
+        return createdTask;
     }
 
     public Optional<Task> deleteTask(String taskId) {
@@ -72,7 +81,7 @@ public class TaskRepository {
                         .build())
                 .map(newTask -> {
                     deleteTask(newTask.id());
-                    return insertTask(newTask);
+                    return createTask(newTask);
                 });
     }
 
