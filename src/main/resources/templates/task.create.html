@@ -17,7 +17,7 @@
                     })
                 }).then(response => {
                     if (response.status >= 200 && response.status < 400) {
-                        document.cookie = 'Application-Action=taskCreated; SameSite=Strict; Secure';
+                        document.cookie = 'Application-Action=taskCreated; max-age=20; SameSite=Strict; Secure';
                         window.location.href = '{rootPath}/';
                     } else {
                         alert(response.statusText);
