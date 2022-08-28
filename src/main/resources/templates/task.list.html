@@ -6,7 +6,7 @@
     {#script}
         <script>
             function deleteTask(taskId) {
-                fetch('/tasks/' + taskId, {
+                fetch('{rootPath}/tasks/' + taskId, {
                     method:'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@
                                                 <p class="caption">Create your tasks using Quarkus RESTEasy & Qute</p>
                                             </div>
                                             <div class="col s3 right-align">
-                                                <a class="waves-effect waves-light btn" href="tasks"><i class="material-icons left">add</i>Create</a>
+                                                <a class="waves-effect waves-light btn" href="{rootPath}/tasks"><i class="material-icons left">add</i>Create</a>
                                             </div>
                                         </div>
                                         {#for task in tasks}
@@ -61,7 +61,7 @@
                                                                 {/}
                                                             </div>
                                                             <div class="card-action">
-                                                                <a class="waves-effect waves-light btn" href="tasks/{task.id}"><i class="material-icons left">edit</i>edit</a>
+                                                                <a class="waves-effect waves-light btn" href="{rootPath}/tasks/{task.id}"><i class="material-icons left">edit</i>edit</a>
                                                                 <a class="waves-effect waves-red btn" onclick="deleteTask('{task.id}')"><i class="material-icons left">delete</i>delete</a>
                                                             </div>
                                                         </div>
