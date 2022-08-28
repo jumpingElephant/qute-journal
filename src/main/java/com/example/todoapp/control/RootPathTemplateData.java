@@ -1,4 +1,4 @@
-package com.example;
+package com.example.todoapp.control;
 
 import io.quarkus.qute.TemplateGlobal;
 import org.eclipse.microprofile.config.ConfigProvider;

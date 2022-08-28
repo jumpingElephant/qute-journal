@@ -1,2 +1,5 @@
-greeting:
-  message: "hello"
+"%ignored":
+  quarkus:
+    mongodb:
+      connection-string: "mongodb://root:qute@localhost:27017/"
+      database: todoapp

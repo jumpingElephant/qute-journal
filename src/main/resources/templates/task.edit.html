@@ -25,7 +25,7 @@
         </script>
     {/script}
 
-    {@com.example.Task task}
+    {@com.example.todoapp.entity.Task task}
     {#main}
     <div  class="container">
         <div class="row">
@@ -61,7 +61,7 @@
                                                         <div class="card-action">
                                                             <a class="waves-effect waves-light btn" onclick="window.history.back()"><i
                                                                         class="material-icons left">cancel</i>Cancel</a>
-                                                            <a class="waves-effect waves-light btn" onclick="updateTask('{task.id}')"><i
+                                                            <a class="waves-effect waves-light btn" onclick="updateTask('{task.key}')"><i
                                                                         class="material-icons left">save</i>Submit</a>
                                                         </div>
                                                     </div>
