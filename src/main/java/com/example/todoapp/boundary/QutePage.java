@@ -79,6 +79,13 @@ public class QutePage {
                 .data(KEY_DISPLAY_MESSAGE, false);
     }
 
+    @GET
+    @Path("tasks")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTasks() {
+        return Response.ok(taskService.getTasks()).build();
+    }
+
     @POST
     @Path("tasks")
     @Consumes(MediaType.APPLICATION_JSON)
