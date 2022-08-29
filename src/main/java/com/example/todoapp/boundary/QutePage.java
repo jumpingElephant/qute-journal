@@ -93,7 +93,6 @@ public class QutePage {
     public Response createTask(@Valid @NotNull Task task) {
         log.info("QutePage.createTask");
         Task createdTask = taskService.createTask(task);
-        taskService.createTask(task);
         return Response.created(URI.create("/tasks/%s".formatted(createdTask.key)))
                 .entity(createdTask)
                 .build();
