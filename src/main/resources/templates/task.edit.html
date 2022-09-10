@@ -5,7 +5,7 @@
     {#script}
         <script>
             function updateTask(taskId) {
-                fetch('{rootPath}/tasks/' + taskId, {
+                fetch('{path:root}/tasks/' + taskId, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -16,7 +16,7 @@
                     })
                 }).then(response => {
                     if (response.status >= 200 && response.status < 400) {
-                        window.location.href = '{rootPath}/';
+                        window.location.href = '{path:root}/';
                     } else {
                         alert(response.statusText);
                     }

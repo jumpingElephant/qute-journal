@@ -4,14 +4,16 @@ import com.example.todoapp.control.TaskService;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import lombok.extern.java.Log;
+import org.jboss.resteasy.reactive.common.util.LocaleHelper;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.Locale;
 
 @Log
 @Path("dev")
@@ -33,8 +35,19 @@ public class DevelopmentEndpoint {
     @GET
     @Path("reset")
     @Produces(MediaType.MEDIA_TYPE_WILDCARD)
-    public Response resetTasks() {
+    public Response resetTasks(@QueryParam("lang") String language, @Context HttpHeaders headers) {
         taskService.init();
-        return Response.seeOther(URI.create("/")).build();
+        String contentLanguage = null;
+        URI uri = URI.create("/");
+        if (language != null) {
+            Locale locale = LocaleHelper.extractLocale(language);
+            if (!Locale.getDefault().getLanguage().equals(locale.getLanguage())) {
+                contentLanguage = locale.getLanguage();
+                uri = UriBuilder.fromUri(URI.create("/")).queryParam("lang", contentLanguage).build();
+            }
+        }
+        return Response
+                .seeOther(uri)
+                .build();
     }
 }
