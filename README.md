@@ -1,3 +1,4 @@
+![qute-journal](https://github.com/jumpingElephant/qute-journal/actions/workflows/docker-publish.yml/badge.svg)
 # qute-demo Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
