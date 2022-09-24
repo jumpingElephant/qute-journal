@@ -2,8 +2,7 @@ name: GitHub Actions Demo
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [ $default-branch ]
 
 jobs:
   Explore-GitHub-Actions:
@@ -22,5 +21,5 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml -DskipTests
       - name: Build the Docker image
-        run: docker build . --file src/main/docker/Dockerfile.jvm --tag jumpingelephant2/qute-journal:${{steps.vars.outputs.tag}}
+        run: docker build . --file src/main/docker/Dockerfile.jvm --tag jumpingelephant2/qute-journal:latest
       - run: echo "🍏 This job's status is ${{ job.status }}."
