@@ -123,6 +123,7 @@ public class QutePage {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateTask(@PathParam("taskId") String taskId, @Valid @NotNull Task task) {
+        log.info("QutePage.updateTask");
         return taskService.updateTask(taskId, task)
                 .map(Response::ok)
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND))
@@ -133,6 +134,7 @@ public class QutePage {
     @Path("tasks/{taskId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTask(@PathParam("taskId") String taskId) {
+        log.info("QutePage.deleteTask");
         if (taskService.deleteTask(taskId)) {
             return Response.ok().build();
         } else {
