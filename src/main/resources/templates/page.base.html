@@ -29,7 +29,7 @@
     {#insert script}{/}
     {#if displayMessage}
     <script>
-        document.cookie = 'Application-Action={applicationAction}; max-age=0; SameSite=Strict; Secure';
+        document.cookie = 'Application-Action={applicationAction}; max-age=0; SameSite=Strict;';
         // @formatter:off
         window.setTimeout(() => M.toast(\{html: '{#insert toastMessage}Have a nice day!{/}'\}),200);
         // @formatter:on
