@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+  labels:
+    app.kubernetes.io/name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: todo-app
+          image: jumpingelephant2/qute-journal
+          env:
+            - name: QUARKUS_MONGODB_CONNECTION_STRING
+              value: mongodb://root:qute@10.41.1.223:27017/
+          ports:
+            - containerPort: 8080
+              name: web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-app
+  ports:
+    - name: web-svc
+      protocol: TCP
+      port: 8080
+      targetPort: web

@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-statefulset
+  labels:
+    app: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  serviceName: "mongodb-service"
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:6-focal
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: qute
+          ports:
+            - containerPort: 27017
+              name: db
+          volumeMounts:
+            - name: mongodb-pvc
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-pvc
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  type: ClusterIP
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: db
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  labels:
+    app.kubernetes.io/name: mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongo-express
+  template:
+    metadata:
+      labels:
+        run: mongo-express
+    spec:
+      containers:
+        - name: mongo-express
+          image: mongo-express:1.0.0-alpha
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: root
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: qute
+            - name: ME_CONFIG_MONGODB_URL
+              value: mongodb://root:qute@10.41.1.223:27017/
+          ports:
+            - containerPort: 8081
+              name: web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-service
+spec:
+  type: NodePort
+  selector:
+    run: mongo-express
+  ports:
+    - name: web-svc
+      protocol: TCP
+      port: 8081
+      nodePort: 30081
+      targetPort: web
