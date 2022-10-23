@@ -12,14 +12,11 @@ import lombok.extern.java.Log;
 import org.jboss.resteasy.reactive.common.util.LocaleHelper;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Objects;
@@ -97,48 +94,5 @@ public class QutePage {
         return editPage
                 .data("task", taskService.findTask(taskId).orElseThrow(NotFoundException::new))
                 .data(KEY_DISPLAY_MESSAGE, false);
-    }
-
-    @GET
-    @Path("tasks")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getTasks() {
-        return Response.ok(taskService.getTasks()).build();
-    }
-
-    @POST
-    @Path("tasks")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createTask(@Valid @NotNull Task task) {
-        log.info("QutePage.createTask");
-        Task createdTask = taskService.createTask(task);
-        return Response.created(URI.create("/tasks/%s".formatted(createdTask.key)))
-                .entity(createdTask)
-                .build();
-    }
-
-    @PUT
-    @Path("tasks/{taskId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updateTask(@PathParam("taskId") String taskId, @Valid @NotNull Task task) {
-        log.info("QutePage.updateTask");
-        return taskService.updateTask(taskId, task)
-                .map(Response::ok)
-                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND))
-                .build();
-    }
-
-    @DELETE
-    @Path("tasks/{taskId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteTask(@PathParam("taskId") String taskId) {
-        log.info("QutePage.deleteTask");
-        if (taskService.deleteTask(taskId)) {
-            return Response.ok().build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
     }
 }
