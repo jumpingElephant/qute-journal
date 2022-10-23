@@ -77,7 +77,7 @@ public class QutePage {
     }
 
     @GET
-    @Path("tasks")
+    @Path("create")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance createTaskPage() {
         log.info("QutePage.createTaskPage");
@@ -87,7 +87,7 @@ public class QutePage {
     }
 
     @GET
-    @Path("tasks/{taskId}")
+    @Path("edit/{taskId}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance editTaskPage(@PathParam("taskId") String taskId) {
         log.info("QutePage.editTask: taskId = " + taskId);

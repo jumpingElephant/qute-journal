@@ -41,7 +41,7 @@
                                                 <p class="caption">{i18n:task_list_caption}</p>
                                             </div>
                                             <div class="col s3 right-align">
-                                                <a class="waves-effect waves-light btn" href="{path:root}/tasks"><i class="material-icons left">add</i>{i18n:create}</a>
+                                                <a class="waves-effect waves-light btn" href="{path:root}/create"><i class="material-icons left">add</i>{i18n:create}</a>
                                             </div>
                                         </div>
                                         {#for task in tasks}
@@ -61,7 +61,7 @@
                                                                 {/}
                                                             </div>
                                                             <div class="card-action">
-                                                                <a class="waves-effect waves-light btn" href="{path:root}/tasks/{task.key}"><i class="material-icons left">edit</i>{i18n:edit}</a>
+                                                                <a class="waves-effect waves-light btn" href="{path:root}/edit/{task.key}"><i class="material-icons left">edit</i>{i18n:edit}</a>
                                                                 <a class="waves-effect waves-red btn" onclick="deleteTask('{task.key}')"><i class="material-icons left">delete</i>{i18n:delete}</a>
                                                             </div>
                                                         </div>
