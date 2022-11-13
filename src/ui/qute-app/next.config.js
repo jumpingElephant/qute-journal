@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isDevelopment = process.env.NODE_ENV !== 'production'
+/** https://nextjs.org/docs/api-reference/next.config.js/rewrites **/
 const rewritesConfig = isDevelopment
     ? [
         {
