@@ -9,3 +9,9 @@ export function getAllTasks(): Promise<Task[]> {
       return response.json() as Promise<Task[]>;
     })
 }
+
+export function deleteTask(key: string): Promise<any> {
+  return fetch('/tasks/' + key, {
+    method: 'DELETE'
+  })
+}

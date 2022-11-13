@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getAllTasks} from "./TaskService";
+import {deleteTask, getAllTasks} from "./TaskService";
 import {Task} from "./Task";
 
 export default function Home() {
@@ -15,6 +15,16 @@ export default function Home() {
       })
   }, []);
 
+  const onDeleteTask = (key: string) => deleteTask(key)
+    .finally(() => {
+      setLoading(true);
+      getAllTasks()
+        .then((tasks) => {
+          setTasks(tasks)
+          setLoading(false)
+        })
+    })
+
   if (isLoading) return <p>Loading...</p>
   if (!tasks) return <p>No tasks</p>
 
@@ -23,8 +33,8 @@ export default function Home() {
       <h1>Tasks</h1>
       <ul>
         {tasks.map(task =>
-          <li
-            key={task.key}>{task.dueDate ? task.dueDate : ''}{task.dueDate && task.title ? ': ' : ''}{task.title ? task.title : ''}</li>
+          <li onClick={() => onDeleteTask(task.key)}
+              key={task.key}>{task.dueDate ? task.dueDate : ''}{task.dueDate && task.title ? ': ' : ''}{task.title ? task.title : ''}</li>
         )}
       </ul>
     </div>
