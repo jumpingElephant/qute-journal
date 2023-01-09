@@ -10,7 +10,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 You can run your application in dev mode that enables live coding using:
 
 ```shell script
-./mvnw compile quarkus:dev
+mvn quarkus:dev
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
@@ -18,11 +18,13 @@ You can run your application in dev mode that enables live coding using:
 If _MongoDB_ needs to run standalone in _dev_-mode a Docker-Compose-file is provided
 
 ```shell script
-docker-compose up --detach
+docker-compose --file src/main/docker/docker-compose.yml up --detach
 ```
 
 The _application.yml_ contains a section, which configures the MongoDB connection. Only the Quarkus profile
 of this configuration needs to get modified with a proper profile name.
+
+> TODO-App should be available at http://localhost:8080
 
 ## Packaging and running the application
 
