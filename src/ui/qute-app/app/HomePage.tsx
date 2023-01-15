@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { deleteTask, getAllTasks } from "../pages/TaskService";
+import { deleteTask, getAllTasks } from "./TaskService";
 import { Task } from "./Task";
 
 export type HomeProps = {
