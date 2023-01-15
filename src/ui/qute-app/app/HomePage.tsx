@@ -1,14 +1,13 @@
+'use client';
 import { useState } from "react";
-import { deleteTask, getAllTasks } from "./TaskService";
+import { deleteTask, getAllTasks } from "../pages/TaskService";
 import { Task } from "./Task";
 
-const quarkusUrl = `http://localhost:8080`;
-
-type HomeProps = {
+export type HomeProps = {
     tasks: Task[]
 }
 
-export default function Home(data: HomeProps) {
+export default function HomePage(data: HomeProps) {
     const [tasks, setTasks] = useState<Task[]>(data.tasks);
     const [isLoading, setLoading] = useState(false);
 
@@ -36,11 +35,4 @@ export default function Home(data: HomeProps) {
             </ul>
         </div>
     );
-}
-
-export async function getServerSideProps(): Promise<{ props: HomeProps }> {
-    const response = await fetch(`${quarkusUrl}/tasks`)
-    const data: Task[] = await response.json();
-
-    return {props: {tasks: data}}
 }

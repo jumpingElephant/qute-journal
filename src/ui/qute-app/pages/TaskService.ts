@@ -1,4 +1,4 @@
-import {Task} from "./Task";
+import { Task } from "../app/Task";
 
 export function getAllTasks(): Promise<Task[]> {
   return fetch('/tasks')

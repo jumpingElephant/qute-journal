@@ -17,6 +17,9 @@ const rewritesConfig = isDevelopment
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    experimental: {
+        appDir: true
+    },
     rewrites: async () => rewritesConfig
 }
 
