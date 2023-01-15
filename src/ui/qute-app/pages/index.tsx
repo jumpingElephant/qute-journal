@@ -4,8 +4,12 @@ import { Task } from "./Task";
 
 const quarkusUrl = `http://localhost:8080`;
 
-export default function Home({data}) {
-    const [tasks, setTasks] = useState<Task[]>(data);
+type HomeProps = {
+    tasks: Task[]
+}
+
+export default function Home(data: HomeProps) {
+    const [tasks, setTasks] = useState<Task[]>(data.tasks);
     const [isLoading, setLoading] = useState(false);
 
     const onDeleteTask = (key: string) => deleteTask(key)
@@ -34,9 +38,9 @@ export default function Home({data}) {
     );
 }
 
-export async function getServerSideProps(): Promise<{ props: { data: Task[] } }> {
+export async function getServerSideProps(): Promise<{ props: HomeProps }> {
     const response = await fetch(`${quarkusUrl}/tasks`)
     const data: Task[] = await response.json();
 
-    return {props: {data}}
+    return {props: {tasks: data}}
 }
