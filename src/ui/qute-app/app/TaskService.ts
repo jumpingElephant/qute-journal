@@ -7,8 +7,8 @@ function getHostPath(): string {
 }
 
 export function getAllTasks(): Promise<Task[]> {
-    let hostPath = getHostPath();
-    console.log("hostPath",hostPath)
+    // let hostPath = getHostPath();
+    // console.log("hostPath",hostPath)
     return fetch(`${getHostPath()}/tasks`)
         .then(response => {
             if (!response.ok) {
