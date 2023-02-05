@@ -29,7 +29,44 @@ export default function RootLayout({children}: {
                 </nav>
             </div>
         </header>
-        {children}
+        <main>
+            {children}
+        </main>
+        <footer className="page-footer">
+            <div className="container">
+                <div className="row">
+                    <div className="col l6 s12">
+                        <h5 className="white-text">Fußzeile</h5>
+                        <p className="grey-text text-lighten-4">Der Inhalt der Fußzeile kann mit Zeilen und Spalten
+                            gestaltet werden.</p>
+                    </div>
+                    <div className="col l4 offset-l2 s12">
+                        <h5 className="white-text">Links</h5>
+                        <ul>
+                            <li><a className="grey-text text-lighten-3" href="https://quarkus.io/"
+                                   target="_blank">Quarkus</a></li>
+                            <li><a className="grey-text text-lighten-3" href="https://materializecss.com/"
+                                   target="_blank">Materialize</a>
+                            </li>
+                            <li><a className="grey-text text-lighten-3" href="https://quarkus.io/blog/qute/"
+                                   target="_blank">Quarkus
+                                Qute</a></li>
+                            <li><a className="grey-text text-lighten-3"
+                                   href="https://www.mongodb.com/docs/manual/introduction/"
+                                   target="_blank">MongoDB</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div className="footer-copyright">
+                <div className="container">
+                    © 2022 Copyright Text
+                    <a className="grey-text text-lighten-4 right" href="https://github.com/jumpingElephant/qute-journal"
+                       target="_blank">Code on
+                        GitHub</a>
+                </div>
+            </div>
+        </footer>
         </body>
         </html>
     );
