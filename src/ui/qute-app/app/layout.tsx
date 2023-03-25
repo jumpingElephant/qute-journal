@@ -17,8 +17,6 @@ export default function RootLayout({children}: {
                         <ul id="nav-mobile" className="left hide-on-med-and-down">
                             <li className="active"><a href="{path:root}/{path:queryParams}"><i
                                 className="material-icons left">event_note</i>Aufgaben</a></li>
-                            <li><a href="{path:root}/dev/reset{path:queryParams}"><i
-                                className="material-icons left">autorenew</i>Zurücksetzen</a></li>
                             <li><a href="http://localhost:8080/q/dev/" target="_blank"><i
                                 className="material-icons left">developer_board</i>Quarkus
                                 Dev UI</a></li>

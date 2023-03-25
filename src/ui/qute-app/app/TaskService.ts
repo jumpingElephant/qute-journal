@@ -23,3 +23,9 @@ export function deleteTask(key: string): Promise<any> {
         method: 'DELETE'
     })
 }
+
+export function resetTasks(): Promise<any> {
+    return fetch(`${getHostPath()}/dev/reset`, {
+        method: 'POST'
+    })
+}

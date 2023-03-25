@@ -10,6 +10,9 @@ const rewritesConfig = isDevelopment
         {
             source: '/tasks/:path*',
             destination: 'http://localhost:8080/tasks/:path*'
+        },{
+            source: '/dev/:path*',
+            destination: 'http://localhost:8080/dev/:path*'
         }
     ]
     : [];
