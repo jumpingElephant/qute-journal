@@ -1,32 +1,38 @@
 'use client';
-import { useState } from "react";
-import { deleteTask, getAllTasks, updateTask } from "../TaskService";
+import React, { useState } from "react";
+import { createTask, deleteTask, getAllTasks, updateTask } from "../TaskService";
 import { Task } from "../Task";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HREF_TASKS } from "../../Hrefs";
 
 export type TaskPageProps = {
-  task: Task
+  task: Task,
+  isNewTask: boolean
 }
 
-export default function TaskPage(data: TaskPageProps) {
-  const [task, setTask] = useState<Task>(data.task);
+export default function TaskPage(props: TaskPageProps) {
+  const [task, setTask] = useState<Task>(props.task);
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onUpdateTask = () => updateTask(task)
-      .finally(() => {
-        router.push(HREF_TASKS);
-        router.refresh();
-      });
+  const onSubmitTask = () =>
+      (props.isNewTask ? createTask(task) : updateTask(task))
+          .finally(() => {
+            router.push(HREF_TASKS);
+            router.refresh();
+          });
   const onDeleteTask = () => deleteTask(task.key)
       .then(() => getAllTasks())
       .finally(() => {
-        console.log("deleted", task.key);
         router.push(HREF_TASKS)
         router.refresh();
       })
+  const onKeyDown = (e: any) => {
+    if (e.keyCode === 13) {
+      onSubmitTask();
+    }
+  }
 
   const onTitleChanged = (e: any) => setTask({...task, title: e.target.value})
   const onDuedateChanged = (e: any) => setTask({...task, dueDate: e.target.value})
@@ -47,7 +53,7 @@ export default function TaskPage(data: TaskPageProps) {
                   <article>
                     <div className="col s12">
                       <div className="row">
-                        <div className="col s7">
+                        <div className="col s6">
                           <p className="caption">Edit your task using Quarkus,
                             RESTEasy & <a href={'https://nextjs.org'}
                                           target={'_blank'}>next.js</a>
@@ -56,7 +62,7 @@ export default function TaskPage(data: TaskPageProps) {
                       </div>
                       <section>
                         <div className="row" aria-label="list of tasks">
-                          <div className="col offset-s1 s10">
+                          <div className="col s12">
                             <div className="card">
                               <div className="card-content">
                                 <div className="row">
@@ -64,8 +70,10 @@ export default function TaskPage(data: TaskPageProps) {
                                     <label htmlFor="task_title">Title</label>
                                     <input placeholder="Title is required"
                                            id="task_title" type="text"
+                                           autoFocus={true}
                                            value={task.title}
-                                           onChange={onTitleChanged}>
+                                           onChange={onTitleChanged}
+                                           onKeyDown={onKeyDown}>
                                     </input>
                                   </div>
                                   <div className="col s6">
@@ -73,20 +81,29 @@ export default function TaskPage(data: TaskPageProps) {
                                     <input placeholder="Due Date" id="task_due_date"
                                            type="date"
                                            value={task.dueDate ? task.dueDate : undefined}
-                                           onChange={onDuedateChanged}>
+                                           onChange={onDuedateChanged}
+                                           onKeyDown={onKeyDown}>
                                     </input>
                                   </div>
                                 </div>
                                 <div className="card-action">
-                                  <Link className="waves-effect waves-light btn"
-                                        href={HREF_TASKS}><i
-                                      className="material-icons left">cancel</i>Cancel</Link>
-                                  <a className="waves-effect waves-light btn"
-                                     onClick={onUpdateTask}><i
-                                      className="material-icons left">save</i>Submit</a>
-                                  <a className="waves-effect waves-light btn"
-                                     onClick={onDeleteTask}><i
-                                      className="material-icons left">delete</i>Delete</a>
+                                  <div className="row s12">
+                                    <div className="col s8">
+                                      <a className="waves-effect waves-light btn"
+                                         onClick={onSubmitTask}><i
+                                          className="material-icons left">save</i>Submit</a>
+                                      {!props.isNewTask &&
+                                          <a className="waves-effect waves-light btn"
+                                             onClick={onDeleteTask}><i
+                                              className="material-icons left">delete</i>Delete</a>
+                                      }
+                                    </div>
+                                    <div className="col s4 right-align">
+                                      <Link className="waves-effect waves-light btn"
+                                            href={HREF_TASKS}><i
+                                          className="material-icons left">cancel</i>Cancel</Link>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>

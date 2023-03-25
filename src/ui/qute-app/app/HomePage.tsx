@@ -3,7 +3,7 @@ import { useState } from "react";
 import { deleteTask, getAllTasks, resetTasks } from "./task/TaskService";
 import { Task } from "./task/Task";
 import Link from "next/link";
-import { HREF_NOT_IMPLEMENTED, HREF_TASK_BY_ID } from "./Hrefs";
+import { HREF_CREATE_TASK, HREF_TASK_BY_ID } from "./Hrefs";
 
 export type HomeProps = {
   tasks: Task[]
@@ -28,7 +28,7 @@ export default function HomePage(data: HomeProps) {
         window.location.reload();
       })
 
-  if (isLoading) return <p>Loading...</p>
+  // if (isLoading) return <p>Loading...</p>
   if (!tasks) return <p>No tasks</p>
 
   return (
@@ -54,7 +54,7 @@ export default function HomePage(data: HomeProps) {
                              onClick={() => onResetTasks()}><i
                               className="material-icons left">autorenew</i>Zurücksetzen</a>
                           <Link className="waves-effect waves-light btn"
-                                href={HREF_NOT_IMPLEMENTED}><i
+                                href={HREF_CREATE_TASK}><i
                               className="material-icons left">add</i>Hinzufügen</Link>
                         </div>
                       </div>
@@ -66,13 +66,13 @@ export default function HomePage(data: HomeProps) {
                                   <div className="card-content">
                                     <div className="row">
                                       <div className="col s6 card-title">
-                                                                        <span className="card-title"
-                                                                              aria-label="title">{task.title}</span>
+                                        <span className="card-title"
+                                              aria-label="title">{task.title}</span>
                                       </div>
                                       {task.dueDate &&
                                           <div className="col s6 right-align">
-                                                                        <span className="card-title"
-                                                                              aria-label="due date">{task.dueDate}</span>
+                                            <span className="card-title"
+                                                  aria-label="due date">{task.dueDate}</span>
                                           </div>
                                       }
                                     </div>
