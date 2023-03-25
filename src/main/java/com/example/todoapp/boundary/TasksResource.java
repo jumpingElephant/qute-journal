@@ -26,6 +26,16 @@ public class TasksResource {
         return Response.ok(taskService.getTasks()).build();
     }
 
+    @GET
+    @Path("{taskId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTasks(@PathParam("taskId") String taskId) {
+        log.info("TasksResource.getTasks");
+        return taskService.findTask(taskId)
+                .map(task -> Response.ok(task).build())
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -53,11 +63,11 @@ public class TasksResource {
     @Path("{taskId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTask(@PathParam("taskId") String taskId) {
-        log.info("TasksResource.deleteTask");
         if (taskService.deleteTask(taskId)) {
-            return Response.ok().build();
+            log.info("TasksResource.deleteTask: deleted");
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            log.info("TasksResource.deleteTask: task not present");
         }
+        return Response.ok().build();
     }
 }
