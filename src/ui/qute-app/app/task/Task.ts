@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 export class Task {
   key!: string;
@@ -6,9 +6,11 @@ export class Task {
   dueDate?: string;
 }
 
-export function dateToString(date: Date) {
-  if (date) {
-    return format(date, 'dd.MM.yyyy');
+export function convertDtoDateValueToDisplayString(s: string) {
+  if (s) {
+    return format(parse(s, 'yyyy-MM-dd', new Date()), 'dd.MM.yyyy');
+  } else {
+    return <string>s;
   }
 }
 

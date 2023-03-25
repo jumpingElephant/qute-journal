@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
 import { deleteTask, getAllTasks, resetTasks } from "./task/TaskService";
-import { Task } from "./task/Task";
+import { convertDtoDateValueToDisplayString, Task } from "./task/Task";
 import Link from "next/link";
 import { HREF_CREATE_TASK, HREF_TASK_BY_ID } from "./Hrefs";
 
@@ -72,7 +72,7 @@ export default function HomePage(data: HomeProps) {
                                       {task.dueDate &&
                                           <div className="col s6 right-align">
                                             <span className="card-title"
-                                                  aria-label="due date">{task.dueDate}</span>
+                                                  aria-label="due date">{convertDtoDateValueToDisplayString(task.dueDate)}</span>
                                           </div>
                                       }
                                     </div>
