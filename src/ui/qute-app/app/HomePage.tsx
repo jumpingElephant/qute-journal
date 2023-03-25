@@ -3,7 +3,7 @@ import { useState } from "react";
 import { deleteTask, getAllTasks, resetTasks } from "./task/TaskService";
 import { Task } from "./task/Task";
 import Link from "next/link";
-import { HREF_NOT_IMPLEMENTED } from "./Hrefs";
+import { HREF_NOT_IMPLEMENTED, HREF_TASK_BY_ID } from "./Hrefs";
 
 export type HomeProps = {
   tasks: Task[]
@@ -78,7 +78,7 @@ export default function HomePage(data: HomeProps) {
                                     </div>
                                     <div className="card-action">
                                       <Link className="waves-effect waves-light btn"
-                                            href={`/task/${task.key}`}><i
+                                            href={HREF_TASK_BY_ID(task.key)}><i
                                           className="material-icons left">edit</i>Bearbeiten</Link>
                                       <a className="waves-effect waves-red btn"
                                          onClick={() => onDeleteTask(task.key)}><i
