@@ -18,16 +18,20 @@ export default function TaskPage(props: TaskPageProps) {
 
   const onSubmitTask = () =>
       (props.isNewTask ? createTask(task) : updateTask(task))
-          .finally(() => {
+          .then(() => {
             router.push(HREF_TASKS);
             router.refresh();
-          });
+          })
+          .catch(reason => console.log(reason));
+
   const onDeleteTask = () => deleteTask(task.key)
       .then(() => getAllTasks())
-      .finally(() => {
+      .then(() => {
         router.push(HREF_TASKS)
         router.refresh();
       })
+      .catch(reason => console.log(reason));
+
   const onKeyDown = (e: any) => {
     if (e.keyCode === 13) {
       onSubmitTask();

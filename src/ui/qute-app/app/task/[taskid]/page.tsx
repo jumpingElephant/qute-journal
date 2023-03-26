@@ -11,6 +11,13 @@ export type TaskArguments = {
 export default async function Page(args: TaskArguments) {
 
   const taskId = args.params.taskid;
-  const task = await getTaskById(taskId);
-  return <TaskPage task={task} isNewTask={false}/>;
+  let task = undefined;
+  await getTaskById(taskId)
+      .then(value => task = value)
+      .catch(reason => {
+        console.log('reason', reason)
+      });
+  if (task) {
+    return <TaskPage task={task} isNewTask={false}/>;
+  }
 };

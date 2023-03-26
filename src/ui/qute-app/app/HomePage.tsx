@@ -21,12 +21,13 @@ export default function HomePage(data: HomeProps) {
               setTasks(tasks)
               setLoading(false)
             })
+            .catch(reason => console.log(reason));
       })
 
   const onResetTasks = () => resetTasks()
       .finally(() => {
         window.location.reload();
-      })
+      });
 
   // if (isLoading) return <p>Loading...</p>
   if (!tasks) return <p>No tasks</p>

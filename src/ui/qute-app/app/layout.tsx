@@ -60,7 +60,7 @@ export default function RootLayout({children}: {
         </div>
         <div className="footer-copyright">
           <div className="container">
-            © 2022 Copyright Text
+            © 2023 Copyright Text
             <a className="grey-text text-lighten-4 right" href="https://github.com/jumpingElephant/qute-journal"
                target="_blank">Code on
               GitHub</a>

@@ -1,18 +1,18 @@
 /** @type {import('next').NextConfig} */
 const isDevelopment = process.env.NODE_ENV !== 'production'
 /** https://nextjs.org/docs/api-reference/next.config.js/rewrites **/
-const rewritesConfig = isDevelopment
+const rewritesConfig = isDevelopment || true
     ? [
         {
             source: '/tasks',
-            destination: 'http://localhost:8080/tasks'
+            destination: 'http://0.0.0.0:8080/tasks'
         },
         {
             source: '/tasks/:path*',
-            destination: 'http://localhost:8080/tasks/:path*'
-        },{
+            destination: 'http://0.0.0.0:8080/tasks/:path*'
+        }, {
             source: '/dev/:path*',
-            destination: 'http://localhost:8080/dev/:path*'
+            destination: 'http://0.0.0.0:8080/dev/:path*'
         }
     ]
     : [];

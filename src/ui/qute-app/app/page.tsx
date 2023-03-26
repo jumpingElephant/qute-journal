@@ -1,8 +1,13 @@
 import HomePage from './HomePage';
 import { getAllTasks } from "./task/TaskService";
 
-export default async function Page() {
-    const recentTasks = await getAllTasks();
+export const metadata = {
+  title: 'TODO-App',
+  themeColor: '#ffffff'
+};
 
-    return <HomePage tasks={recentTasks}/>;
+export default async function Page() {
+  const recentTasks = await getAllTasks();
+
+  return <HomePage tasks={recentTasks}/>;
 }

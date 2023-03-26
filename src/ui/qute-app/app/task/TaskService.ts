@@ -1,12 +1,15 @@
 import { Task } from "./Task";
 
-const quarkusUrl = `http://localhost:8080`;
+const quarkusUrl = `http://0.0.0.0:8080`;
+
 function getHostPath(): string {
   return typeof window === 'undefined' ? quarkusUrl : '';
 }
 
 export function getAllTasks(): Promise<Task[]> {
-  return fetch(`${getHostPath()}/tasks`)
+  let headers = new Headers();
+  headers.set('Cache-Control', 'no-store');
+  return fetch(`${getHostPath()}/tasks`, {headers})
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -16,8 +19,11 @@ export function getAllTasks(): Promise<Task[]> {
 }
 
 export function getTaskById(taskId: string): Promise<Task> {
-  return fetch(`${getHostPath()}/tasks/${taskId}`)
+  let headers = new Headers();
+  headers.set('Cache-Control', 'no-store');
+  return fetch(`${getHostPath()}/tasks/${taskId}`, {headers})
       .then(response => {
+        console.log('status', response.status);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
@@ -28,27 +34,33 @@ export function getTaskById(taskId: string): Promise<Task> {
 
 export function createTask(task: Task): Promise<any> {
   let headers = new Headers();
+  headers.set('Cache-Control', 'no-store');
   headers.set('Content-Type', 'application/json');
   return fetch(`${getHostPath()}/tasks`, {
     method: 'POST',
-    headers: headers,
+    headers,
     body: JSON.stringify(task)
   })
 }
 
 export function updateTask(task: Task): Promise<any> {
   let headers = new Headers();
+  headers.set('Cache-Control', 'no-store');
   headers.set('Content-Type', 'application/json');
   return fetch(`${getHostPath()}/tasks/${task.key}`, {
     method: 'PUT',
-    headers: headers,
+    headers,
     body: JSON.stringify(task)
   })
 }
 
 export function deleteTask(key: string): Promise<any> {
+  let headers = new Headers();
+  headers.set('Cache-Control', 'no-store');
+  headers.set('Content-Type', 'application/json');
   return fetch(`${getHostPath()}/tasks/${key}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers
   })
 }
 

@@ -29,8 +29,8 @@ public class TasksResource {
     @GET
     @Path("{taskId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTasks(@PathParam("taskId") String taskId) {
-        log.info("TasksResource.getTasks");
+    public Response getTaskById(@PathParam("taskId") String taskId) {
+        log.info("TasksResource.getTaskById: " + taskId);
         return taskService.findTask(taskId)
                 .map(task -> Response.ok(task).build())
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
@@ -52,7 +52,7 @@ public class TasksResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateTask(@PathParam("taskId") String taskId, @Valid @NotNull Task task) {
-        log.info("TasksResource.updateTask");
+        log.info("TasksResource.updateTask: " + taskId);
         return taskService.updateTask(taskId, task)
                 .map(Response::ok)
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND))
@@ -64,9 +64,9 @@ public class TasksResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTask(@PathParam("taskId") String taskId) {
         if (taskService.deleteTask(taskId)) {
-            log.info("TasksResource.deleteTask: deleted");
+            log.info("TasksResource.deleteTask: deleted: " + taskId);
         } else {
-            log.info("TasksResource.deleteTask: task not present");
+            log.info("TasksResource.deleteTask: task not present: " + taskId);
         }
         return Response.ok().build();
     }
