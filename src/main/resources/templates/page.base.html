@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{#insert title}TODOs{/}</title>
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{path:root}/css/materialize.css" media="screen,projection"/>
     <link rel="stylesheet" href="{path:root}/css/app.css">
@@ -36,10 +38,12 @@
     </script>
     {/}
     <script>
+        // @formatter:off
         document.addEventListener('DOMContentLoaded', function () {
             const elems = document.querySelectorAll('.language-dropdown-trigger');
             const instances = M.Dropdown.init(elems, \{hover: false\});
         });
+        // @formatter:on
     </script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -53,13 +57,17 @@
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li class="active"><a href="{path:root}/{path:queryParams}"><i
                                     class="material-icons left">event_note</i>{i18n:task-title}</a></li>
-                    <li><a href="{path:root}/dev/reset{path:queryParams}"><i class="material-icons left">autorenew</i>{i18n:reset}</a></li>
+                    <li><a href="{path:root}/dev/reset{path:queryParams}"><i
+                                    class="material-icons left">autorenew</i>{i18n:reset}</a></li>
                     <li><a href="{path:root}/q/dev/" target="_blank"><i class="material-icons left">developer_board</i>Quarkus
                             Dev UI</a></li>
-                    <li><a href="http://localhost:8081/db/todoapp/" target="_blank"><i class="material-icons left">explicit</i>Mongo Express</a></li>
+                    <li><a href="http://localhost:8081/db/todoapp/" target="_blank"><i
+                                    class="material-symbols-outlined left">database</i>Mongo
+                            Express</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
-                    <li><a class="language-dropdown-trigger" href="#!" data-target="language-dropdown">{i18n:language_dropdown}<i
+                    <li><a class="language-dropdown-trigger" href="#!"
+                           data-target="language-dropdown">{i18n:language_dropdown}<i
                                     class="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
             </div>
